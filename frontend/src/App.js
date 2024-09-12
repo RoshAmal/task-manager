@@ -1,8 +1,12 @@
 import TaskList from './components/TaskList/TaskList';
+import CreateTaskPane from './components/CreateTaskPane/CreateTaskPane';
 
 function App() {
   return (
-    <TaskList />
+    <div>
+      <CreateTaskPane />
+      <TaskList />
+    </div>
   );
 }
 

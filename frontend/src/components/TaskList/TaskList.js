@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './TaskList.css';
 
 const TaskList = () => {
-  const tasks = [
+  const [tasks,setTask] = useState([
     { index: 1, taskItem: 'Clean room' },
     { index: 2, taskItem: 'Go to Gym' },
     { index: 3, taskItem: 'Cook breakfast' }
-  ];
+  ]);
 
   return (
     <div>
