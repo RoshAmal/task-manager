@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import './CreateTaskPane.css';
 
 const CreateTaskPane = () => {
-	const [newTask,setNewTask] = useState([]);
+	const [newTask,setNewTask] = useState('');
 	const handleInputChange = (e) => {
+		console.log('Input changed:', e.target.value);
 		setNewTask(e.target.value);
 	};
 	const handleCreateTask = () => {
+		console.log('New task:',newTask);
 		if (newTask.trim()==='') return;
+		console.log('Task Created:', newTask);
 		setNewTask('');
 	};
 	return (
@@ -20,7 +23,7 @@ const CreateTaskPane = () => {
 			onChange={handleInputChange}/>
 		<button
 			className="create-task-btn"
-			onChange={handleCreateTask}>
+			onClick={handleCreateTask}>
 			Create Task
 		</button>
 		</div>
