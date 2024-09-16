@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './TaskList.css';
 import axios from 'axios';
 
-const TaskList = () => {
+const TaskList = ({ refreshTasks }) => {
   const [tasks,setTask] = useState([]);
 
   const listTasks = async () => {
@@ -17,7 +17,7 @@ const TaskList = () => {
 
   useEffect(()=>{
       listTasks();
-    },[]);
+    },[refreshTasks]);
   
   return (
     <div>
@@ -25,7 +25,7 @@ const TaskList = () => {
       <div>
         {tasks.length > 0 ? (
           tasks.map(task => (
-            <div key={task.index} className="task-card">
+            <div key={task.id} className="task-card">
               <h5>{task.taskItem}</h5>
             </div>
           ))

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './CreateTaskPane.css';
 import axios from 'axios';
-const CreateTaskPane = () => {
+const CreateTaskPane = ({ onTaskCreated }) => {
 	const [newTask,setNewTask] = useState('');
 	const handleInputChange = (e) => {
 		setNewTask(e.target.value);
@@ -14,6 +14,7 @@ const CreateTaskPane = () => {
 			});
 			if (response.status === 201) {
 				setNewTask('');
+				onTaskCreated();
 			}
 		} catch(error){
 			console.error('Error creating task:', error);
