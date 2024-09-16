@@ -13,13 +13,13 @@ router.post('/api/tasks', async (req, res) => {
   }
 });
 
-// router.get('/tasks', async (req, res) => {
-//   try {
-//     const tasks = await Task.find();
-//     res.status(200).json(tasks);
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error fetching tasks', error });
-//   }
-// });
+router.get('/api/tasks', async (req, res) => {
+  try {
+    const tasks = await Task.find();
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching tasks', error });
+  }
+});
 
 module.exports = router;
