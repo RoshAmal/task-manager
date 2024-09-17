@@ -27,8 +27,8 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
-  }
-  
-  .close-btn:hover {
+}
+
+.close-btn:hover {
     color: red;
-  }
+}
