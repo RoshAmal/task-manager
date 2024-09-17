@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import './TaskList.css';
 import axios from 'axios';
+import TaskDetails from '../TaskDetails/TaskDetails';
 
 const TaskList = ({ refreshTasks }) => {
   const [tasks,setTask] = useState([]);
+  const [selectedTask,setSelectedTask] = useState(false);
 
   const listTasks = async () => {
     try{
@@ -18,6 +20,10 @@ const TaskList = ({ refreshTasks }) => {
   useEffect(()=>{
       listTasks();
     },[refreshTasks]);
+
+  const handleViewTask = (task) => {
+    setSelectedTask(task)
+  };
   
   return (
     <div>
@@ -25,7 +31,9 @@ const TaskList = ({ refreshTasks }) => {
       <div>
         {tasks.length > 0 ? (
           tasks.map(task => (
-            <div key={task.id} className="task-card">
+            <div key={task.id} 
+              className="task-card"
+              onClick={()=>handleViewTask(task)}>
               <h5>{task.taskItem}</h5>
             </div>
           ))
@@ -34,6 +42,7 @@ const TaskList = ({ refreshTasks }) => {
         <p>No tasks found</p>
         }
       </div>
+      { selectedTask && <TaskDetails task={selectedTask} /> }
     </div>
   );
 };
