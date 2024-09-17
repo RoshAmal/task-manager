@@ -5,7 +5,7 @@ import TaskDetails from '../TaskDetails/TaskDetails';
 
 const TaskList = ({ refreshTasks }) => {
   const [tasks,setTask] = useState([]);
-  const [selectedTask,setSelectedTask] = useState(false);
+  const [selectedTask,setSelectedTask] = useState(null);
 
   const listTasks = async () => {
     try{
@@ -22,7 +22,11 @@ const TaskList = ({ refreshTasks }) => {
     },[refreshTasks]);
 
   const handleViewTask = (task) => {
-    setSelectedTask(task)
+    setSelectedTask(task);
+  };
+
+  const closeTaskDetails = () => {
+    setSelectedTask(null);
   };
   
   return (
@@ -42,7 +46,10 @@ const TaskList = ({ refreshTasks }) => {
         <p>No tasks found</p>
         }
       </div>
-      { selectedTask && <TaskDetails task={selectedTask} /> }
+      { selectedTask && (
+          <TaskDetails task={selectedTask} onClose={closeTaskDetails}/>
+        )
+      }
     </div>
   );
 };
