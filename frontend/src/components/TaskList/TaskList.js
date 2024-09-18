@@ -29,8 +29,16 @@ const TaskList = ({ refreshTasks }) => {
     setSelectedTask(null);
   };
 
-  const saveTask = (updatedTask) => {
-    setTask(tasks.map(task => task._id === updatedTask._id ? updatedTask : task));
+  const saveTask = async (updatedTask) => {
+    try{
+      const response = await axios.put(`http://localhost:5000/api/tasks/${updatedTask._id}`,{
+        taskItem: updatedTask.taskItem,
+      });
+      if (response.status === 200)
+        setTask(tasks.map(task => task._id === updatedTask._id ? updatedTask : task));
+    } catch (error) {
+      console.error('Error updating task:', error);
+    }
   };
   
   return (
