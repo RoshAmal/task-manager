@@ -28,6 +28,10 @@ const TaskList = ({ refreshTasks }) => {
   const closeTaskDetails = () => {
     setSelectedTask(null);
   };
+
+  const saveTask = (updatedTask) => {
+    setTask(tasks.map(task => task._id === updatedTask._id ? updatedTask : task));
+  };
   
   return (
     <div>
@@ -47,7 +51,9 @@ const TaskList = ({ refreshTasks }) => {
         }
       </div>
       { selectedTask && (
-          <TaskDetails task={selectedTask} onClose={closeTaskDetails}/>
+          <TaskDetails task={selectedTask}
+            onClose={closeTaskDetails}
+            onSave={saveTask}/>
         )
       }
     </div>
