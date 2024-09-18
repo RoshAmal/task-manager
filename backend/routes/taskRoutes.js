@@ -22,4 +22,17 @@ router.get('/api/tasks', async (req, res) => {
   }
 });
 
+router.put('/api/tasks/:id', async (req, res) => {
+  const { id } = req.params;
+  const { taskItem } = req.body;
+  try{
+    const updatedTask = await Task.findByIdAndUpdate(id, { taskItem }, { new: true });
+    if (!updatedTask)
+      return res.status(404).json({ message: 'Task not found' });
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating task', error });
+  }
+});
+
 module.exports = router;
