@@ -1,4 +1,3 @@
-// routes/taskRoutes.js
 const express = require('express');
 const Task = require('../models/Task');
 const router = express.Router();
@@ -32,6 +31,22 @@ router.put('/api/tasks/:id', async (req, res) => {
     res.status(200).json(updatedTask);
   } catch (error) {
     res.status(500).json({ message: 'Error updating task', error });
+  }
+});
+
+router.delete('/api/tasks/:id', async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    const deletedTask = await Task.findByIdAndDelete(id);
+
+    if (!deletedTask) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+
+    res.status(200).json({ message: 'Task deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
   }
 });
 

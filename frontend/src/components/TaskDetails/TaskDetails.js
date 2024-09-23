@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TaskDetails.css';
 
-const TaskDetails = ({ task, onClose, onSave }) => {
+const TaskDetails = ({ task, onClose, onSave, onDelete }) => {
 
     const [editedTaskItem,setEditedTaskItem] = useState(task.taskItem);
     const [dropdownVisibile,setDropdownVisible] = useState(false);
@@ -18,9 +18,11 @@ const TaskDetails = ({ task, onClose, onSave }) => {
         setDropdownVisible(!dropdownVisibile);
     };
 
-    const handleDelete = () => {
-
+     const handleDelete = () => {
+        onDelete(task);
+        onClose();
     };
+
     const handleCloseClick = () => {
         onSave({...task,taskItem:editedTaskItem});
         onClose();
