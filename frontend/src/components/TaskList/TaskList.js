@@ -41,6 +41,17 @@ const TaskList = ({ refreshTasks }) => {
     }
   };
   
+  const deleteTask = async (taskToDelete) => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/tasks/${taskToDelete._id}`);
+      if (response.status === 200) {
+        setTask(tasks.filter(task => task._id !== taskToDelete._id));
+      }
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
+
   return (
     <div>
       <h4 className="task-list-heading">Task List</h4>
@@ -61,7 +72,8 @@ const TaskList = ({ refreshTasks }) => {
       { selectedTask && (
           <TaskDetails task={selectedTask}
             onClose={closeTaskDetails}
-            onSave={saveTask}/>
+            onSave={saveTask}
+            onDelete={deleteTask}/>
         )
       }
     </div>
