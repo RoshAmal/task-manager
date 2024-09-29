@@ -55,7 +55,7 @@ const TaskList = ({ refreshTasks }) => {
   return (
     <div>
       <h4 className="task-list-heading">Task List</h4>
-      <div>
+      <div className="task-grid">
         {tasks.length > 0 ? (
           tasks.map(task => (
             <div key={task.id} 
