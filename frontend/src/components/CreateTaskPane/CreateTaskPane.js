@@ -22,18 +22,20 @@ const CreateTaskPane = ({ onTaskCreated }) => {
 		setNewTask('');
 	};
 	return (
-		<div>
-		<input
-			className="task-input"
-			type="text"
-			placeholder="Enter a new task"
-			value={newTask}
-			onChange={handleInputChange}/>
-		<button
-			className="create-task-btn"
-			onClick={handleCreateTask}>
-			Create Task
-		</button>
+		<div className="task-create-overlay">
+			<div className="task-create-modal">
+				<input
+					className="task-input"
+					type="text"
+					placeholder="Enter a new task"
+					value={newTask}
+					onChange={handleInputChange}/>
+				<button
+					className="create-task-btn"
+					onClick={handleCreateTask}>
+					Create Task
+				</button>
+			</div>
 		</div>
 	);
 };

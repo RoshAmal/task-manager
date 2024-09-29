@@ -4,13 +4,23 @@ import CreateTaskPane from './components/CreateTaskPane/CreateTaskPane';
 
 function App() {
   const [refreshTasks, setRefreshTasks]=useState(false);
+  const [showTaskCreationModal, setShowTaskCreationModal]=useState(false);
 
   const handleTaskCreated = () => {
     setRefreshTasks(prev => !prev);
   };
+
+  const onNewTaskClick = () => {
+    setShowTaskCreationModal(!showTaskCreationModal);
+  };
+
   return (
     <div>
-      <CreateTaskPane onTaskCreated={handleTaskCreated}/>
+      <button onClick={onNewTaskClick}>New Task</button>
+      {
+        showTaskCreationModal &&
+        <CreateTaskPane onTaskCreated={handleTaskCreated}/>  
+      }
       <TaskList refreshTasks={refreshTasks}/>
     </div>
   );
