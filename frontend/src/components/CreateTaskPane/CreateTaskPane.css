@@ -31,15 +31,27 @@
   align-items: stretch;
 }
 
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.input-label {
+  width: 30%;
+  text-align: left;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
 .task-input {
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 90%;
-    box-sizing: border-box;
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .create-task-btn {

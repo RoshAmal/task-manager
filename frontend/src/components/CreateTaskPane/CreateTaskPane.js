@@ -3,6 +3,9 @@ import './CreateTaskPane.css';
 import axios from 'axios';
 const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 	const [newTask,setNewTask] = useState('');
+	const [description, setDescription] = useState('');
+	const [dueDate, setDueDate] = useState('');
+
 	const handleInputChange = (e) => {
 		setNewTask(e.target.value);
 	};
@@ -11,9 +14,13 @@ const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 		try{
 			const response = await axios.post('http://localhost:5000/api/tasks', {
 				taskItem: newTask,
+				description,
+				dueDate,
 			});
 			if (response.status === 201) {
 				setNewTask('');
+				setDescription('');
+				setDueDate('');
 				onTaskCreated();
 			}
 		} catch(error){
@@ -41,9 +48,27 @@ const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 					<input
 						className="task-input"
 						type="text"
-						placeholder="Enter a new task"
+						placeholder="New task"
 						value={newTask}
 						onChange={handleInputChange}/>
+					<div className="input-container">
+						<label className="input-label">Description:</label>
+						<input
+							className="task-input"
+							type="text"
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+							/>
+					</div>
+					<div className="input-container">
+						<label className="input-label">Due Date:</label>
+						<input
+							className="task-input"
+							type="text"
+							value={dueDate}
+							onChange={(e) => setDueDate(e.target.value)}
+							/>
+					</div>
 					<button
 						className="create-task-btn"
 						onClick={handleCreateTask}>
