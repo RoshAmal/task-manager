@@ -10,16 +10,16 @@ function App() {
     setRefreshTasks(prev => !prev);
   };
 
-  const onNewTaskClick = () => {
+  const toggleTaskCreationModal = () => {
     setShowTaskCreationModal(!showTaskCreationModal);
   };
 
   return (
     <div>
-      <button onClick={onNewTaskClick}>New Task</button>
+      <button onClick={toggleTaskCreationModal}>New Task</button>
       {
         showTaskCreationModal &&
-        <CreateTaskPane onTaskCreated={handleTaskCreated}/>  
+        <CreateTaskPane onTaskCreated={handleTaskCreated} onClose={toggleTaskCreationModal}/>  
       }
       <TaskList refreshTasks={refreshTasks}/>
     </div>
