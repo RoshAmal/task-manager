@@ -3,8 +3,9 @@ const Task = require('../models/Task');
 const router = express.Router();
 
 router.post('/api/tasks', async (req, res) => {
+  const { taskItem, person, priority, status, dueDate, description } = req.body;
+  const newTask =new Task({ taskItem, person, priority, status, dueDate, description });
   try {
-    const newTask = new Task({ taskItem: req.body.taskItem });
     await newTask.save();
     res.status(201).json({ message: 'Task created successfully', task: newTask });
   } catch (error) {
