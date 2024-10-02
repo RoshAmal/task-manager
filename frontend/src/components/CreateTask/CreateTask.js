@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './CreateTaskPane.css';
+import './CreateTask.css';
 import axios from 'axios';
 const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 	const [newTask,setNewTask] = useState('');

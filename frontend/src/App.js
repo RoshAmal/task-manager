@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TaskList from './components/TaskList/TaskList';
-import CreateTaskPane from './components/CreateTaskPane/CreateTaskPane';
+import CreateTask from './components/CreateTask/CreateTask';
 
 function App() {
   const [refreshTasks, setRefreshTasks]=useState(false);
@@ -19,7 +19,7 @@ function App() {
       <button onClick={toggleTaskCreationModal}>New Task</button>
       {
         showTaskCreationModal &&
-        <CreateTaskPane onTaskCreated={handleTaskCreated} onClose={toggleTaskCreationModal}/>  
+        <CreateTask onTaskCreated={handleTaskCreated} onClose={toggleTaskCreationModal}/>  
       }
       <TaskList refreshTasks={refreshTasks}/>
     </div>
