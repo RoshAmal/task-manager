@@ -6,6 +6,8 @@ const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 	const [description, setDescription] = useState('');
 	const [dueDate, setDueDate] = useState('');
 	const [status, setStatus] = useState('To Do');
+	const [person, setPerson] = useState('');
+	const [priority, setPriority] = useState('Medium');
 
 	const handleInputChange = (e) => {
 		setNewTask(e.target.value);
@@ -15,15 +17,19 @@ const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 		try{
 			const response = await axios.post('http://localhost:5000/api/tasks', {
 				taskItem: newTask,
-				description,
-				dueDate,
+				person,
+				priority,
 				status,
+				dueDate,
+				description,
 			});
 			if (response.status === 201) {
 				setNewTask('');
 				setDescription('');
 				setDueDate('');
 				setStatus('To Do');
+				setPerson('');
+				setPriority('Medium');
 				onTaskCreated();
 			}
 		} catch(error){
@@ -49,31 +55,34 @@ const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 				</div>
 				<div className="modal-options">
 					<input
-						className="task-input"
+						className="task-input title"
 						type="text"
 						placeholder="New task"
 						value={newTask}
 						onChange={handleInputChange}/>
 					<div className="input-container">
-						<label className="input-label">Description:</label>
+						<label className="input-label">Person</label>
 						<input
 							className="task-input"
 							type="text"
-							value={description}
-							onChange={(e) => setDescription(e.target.value)}
+							value={person}
+							onChange={(e) => setPerson(e.target.value)}
 							/>
 					</div>
 					<div className="input-container">
-						<label className="input-label">Due Date:</label>
-						<input
+						<label className="input-label">Priority</label>
+						<select
 							className="task-input"
-							type="date"
-							value={dueDate}
-							onChange={(e) => setDueDate(e.target.value)}
-							/>
+							value={priority}
+							onChange={(e) => setPriority(e.target.value)}
+							>
+							<option value="Low">Low</option>
+							<option value="Medium">Medium</option>
+							<option value="High">High</option>
+						</select>
 					</div>
 					<div className="input-container">
-						<label className="input-label">Status:</label>
+						<label className="input-label">Status</label>
 						<select
 							className="task-input"
 							value={status}
@@ -85,6 +94,24 @@ const CreateTaskPane = ({ onTaskCreated, onClose }) => {
 							<option value="Blocked">Blocked</option>
 							<option value="Cancelled">Cancelled</option>
 						</select>
+					</div>
+					<div className="input-container">
+						<label className="input-label">Date</label>
+						<input
+							className="task-input"
+							type="date"
+							value={dueDate}
+							onChange={(e) => setDueDate(e.target.value)}
+							/>
+					</div>
+					<div className="input-container">
+						<label className="input-label">Brief Description</label>
+						<input
+							className="task-input"
+							type="text"
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+							/>
 					</div>
 					<button
 						className="create-task-btn"
